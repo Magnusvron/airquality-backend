@@ -9,9 +9,7 @@ import os
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
-@app.route('/')
-def home():
-    return "✅ Backend Flask activo en Render"
+
 
 mongo = PyMongo(app)
 
@@ -46,6 +44,10 @@ def get_historico():
     for d in data:
         d['_id'] = str(d['_id'])
     return jsonify(data)
+
+@app.route('/')
+def home():
+    return "✅ Backend Flask activo en Render"
 
 if __name__ == '__main__':
     threading.Thread(target=start_scheduler, daemon=True).start()
