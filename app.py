@@ -9,6 +9,9 @@ import os
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
+@app.route('/')
+def home():
+    return "✅ Backend Flask activo en Render"
 
 mongo = PyMongo(app)
 
