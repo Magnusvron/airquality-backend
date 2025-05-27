@@ -33,10 +33,12 @@ def fetch_and_store():
         print("⚠️ Error al obtener datos:", e)
 
 def start_scheduler():
+    print("🚀 Iniciando tarea programada cada 5 minutos")
     schedule.every(5).minutes.do(fetch_and_store)
     while True:
         schedule.run_pending()
         time.sleep(1)
+
 
 @app.route('/historico', methods=['GET'])
 def get_historico():
