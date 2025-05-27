@@ -51,6 +51,17 @@ def get_historico():
 def home():
     return "✅ Backend Flask activo en Render"
 
+@app.route('/test-store', methods=['GET'])
+def test_store():
+    from datetime import datetime
+    result = mongo.db.measurements.insert_one({
+        "timestamp": datetime.utcnow(),
+        "aqi": 99,
+        "iaqi": {"t": {"v": 25}, "h": {"v": 50}}
+    })
+    return jsonify({"inserted_id": str(result.inserted_id)})
+
+
 if __name__ == '__main__':
     threading.Thread(target=start_scheduler, daemon=True).start()
     print("🟢 Flask iniciado correctamente")
